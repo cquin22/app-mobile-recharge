@@ -9,14 +9,14 @@
 module.exports = {
 
   attributes: {
-    currency: {
-      type: 'string'
+    type: {
+      type: 'string',
+      defaultsTo: 'costBySeconds',
+      unique: true
     },
-    recharge_value: {
-      type: 'integer'
-    },
-    client: {
-      model: 'client'
+    value: {
+      type: 'integer',
+      defaultsTo: 50
     }
   }
 };

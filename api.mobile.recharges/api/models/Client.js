@@ -14,7 +14,16 @@ module.exports = {
       unique: true
     },
     balance: {
-      type: 'integer'
+      type: 'integer',
+      defaultsTo: 0
+    },
+    time_left: {
+      type: 'integer',
+      defaultsTo: 0
+    },
+    recharges:{
+      collection: 'recharge',
+      via: 'client'
     }
   }
 };
