@@ -18,13 +18,13 @@ var ClientController = {
       query.then(function(){
         query.populate('recharges')
           .exec(function(error, client){
-            if(err){
+            if(error){
               return res.AppResponse(400, sails.config.constants.response.UNEXPECTED_ERROR, error);
             }else{
               if(client){
-                return res.AppResponse(200, sails.config.constants.response.CLIENT_IS_NOT_CREATED, client);
+                return res.AppResponse(200, sails.config.constants.response.BALANCE_RESPONSE_SUCCESS, client);
               }else{
-                return res.AppResponse(400, sails.config.constants.response.BALANCE_RESPONSE_SUCCESS, client);
+                return res.AppResponse(400, sails.config.constants.response.CLIENT_IS_NOT_CREATED , client);
               }
             }
           });
@@ -44,14 +44,14 @@ var ClientController = {
     var query = Client.findOne({phone: req.query.phone });
     query.then(function(){
       query.populate('expense')
-        .exec(function(err, client){
-          if(err){
-            return res.AppResponse(400, sails.config.constants.response.UNEXPECTED_ERROR, err);
+        .exec(function(error, client){
+          if(error){
+            return res.AppResponse(400, sails.config.constants.response.UNEXPECTED_ERROR, error);
           }else{
             if(client){
-              return res.AppResponse(200, sails.config.constants.response.CLIENT_IS_NOT_CREATED, client);
+              return res.AppResponse(200, sails.config.constants.response.EXPENSE_RESPONSE_SUCCESS , client);
             }else{
-              return res.AppResponse(400, sails.config.constants.response.EXPENSE_RESPONSE_SUCCESS, client);
+              return res.AppResponse(400, sails.config.constants.response.CLIENT_IS_NOT_CREATED, client);
             }
           }
         });
