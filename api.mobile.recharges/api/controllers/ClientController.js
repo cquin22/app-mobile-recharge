@@ -1,20 +1,67 @@
 /**
- * ClientApiController
+ * ClientController
  *
- * @description :: Server-side logic for managing Clientapis
+ * @description :: Server-side logic end points of the CRUD client
+ * @author:: Cristian Quintero <cristianqr22@gmail.com>
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+var ClientController = {
 
-module.exports = {
+  /**
+   * @sailsdoc
+   *
+   * @description Get client balance
+   * @returns {Object} AppResponse.
+  */
+  'getBalance': function(req, res){
+      var query = Client.findOne({phone: req.query.phone });
+      query.then(function(){
+        query.populate('recharges')
+          .exec(function(error, client){
+            if(err){
+              return res.AppResponse(400, sails.config.constants.response.UNEXPECTED_ERROR, error);
+            }else{
+              if(client){
+                return res.AppResponse(200, sails.config.constants.response.CLIENT_IS_NOT_CREATED, client);
+              }else{
+                return res.AppResponse(400, sails.config.constants.response.BALANCE_RESPONSE_SUCCESS, client);
+              }
+            }
+          });
+      });
+      query.catch(function(error){
+        return res.AppResponse(400, sails.config.constants.response.UNEXPECTED_ERROR, error);
+      });
+  },
 
-  'create': function(req, res){
-    Client.create(req.body , function(err, response){
-      if(err){
-        return res.AppResponse(400, 'USER_CREATED_SUCCESSFULLY', err);
-      }else{
-        return res.AppResponse(200, 'UPDATE_SUCCESSFULLY', response);
-      }
+  /**
+   * @sailsdoc
+   *
+   * @description Get client expense
+   * @returns {Object} AppResponse.
+  */
+  'getExpense': function(req, res){
+    var query = Client.findOne({phone: req.query.phone });
+    query.then(function(){
+      query.populate('expense')
+        .exec(function(err, client){
+          if(err){
+            return res.AppResponse(400, sails.config.constants.response.UNEXPECTED_ERROR, err);
+          }else{
+            if(client){
+              return res.AppResponse(200, sails.config.constants.response.CLIENT_IS_NOT_CREATED, client);
+            }else{
+              return res.AppResponse(400, sails.config.constants.response.EXPENSE_RESPONSE_SUCCESS, client);
+            }
+          }
+        });
+    });
+    query.catch(function(error){
+      return res.AppResponse(400, sails.config.constants.response.UNEXPECTED_ERROR, error);
     });
   },
 };
+
+
+module.exports = ClientController;
 

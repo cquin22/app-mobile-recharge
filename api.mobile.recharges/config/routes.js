@@ -32,10 +32,13 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  'POST /recharge': 'RechargeController.create',
+  'POST /recharge': 'MainController.setClientAndRecharge',
   'POST /cost': 'CostController.create',
   'GET /cost': 'CostController.get',
-  'PUT /cost': 'CostController.update'
+  'PUT /cost': 'CostController.update',
+  'GET /balance': 'ClientController.getBalance',
+  'GET /expense': 'ClientController.getExpense',
+  'POST /expense': 'MainController.setExpense',
 
   /***************************************************************************
   *                                                                          *

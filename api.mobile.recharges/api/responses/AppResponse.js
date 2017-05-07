@@ -1,30 +1,18 @@
 /**
- * User response Handler
+ * App response Handler
  *
  * Usage:
- * return res.forbidden();
- * return res.forbidden(err);
- * return res.forbidden(err, 'some/specific/forbidden/view');
- * ```
+ * return res.AppResponse(response_type, response_code, object);
+ *
  */
-var responses = {
-  //200
-  INIT_CONFIG_OK: "INIT_CONFIG_OK",
-  USER_CREATED_SUCCESSFULLY: "USER_CREATED_SUCCESSFULLY",
-  SATISFACTORY_LOGIN : "SATISFACTORY_LOGIN",
-  SATISFACTORY_LOGOUT : "SATISFACTORY_LOGOUT",
-  UPDATE_SUCCESSFULLY : "UPDATE_SUCCESSFULLY"
 
-};
-
-
-module.exports = function AppResponse (status, msg, data ) {
+module.exports = function AppResponse (status, responseCode, data ) {
   "use strict";
   var res = this.res;
-  var response = {'status': null, 'msg': null, 'data': null };
+  var response = {'status': null, 'responseCode': null, 'data': null };
   response.status = status;
-  if(responses.hasOwnProperty(msg)){
-    response.msg = responses[msg];
+  if( sails.config.constants.response.hasOwnProperty(responseCode)){
+    response.responseCode = sails.config.constants.response[responseCode];
   }
   if(data){
     response.data = data;
