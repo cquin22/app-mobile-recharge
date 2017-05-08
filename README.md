@@ -19,6 +19,8 @@ En este caso se debe implementar un esquema de autenticación JWT en el api y so
 ## Despliegues.
 Para los despliegues se usa una cuenta de Visual Studio Team Services, que me permite automatizar despliegues y tareas, en este caso se especifican 3 tareas:
 
+![alt text](http://image.ibb.co/mBKFLk/Build_27.png)
+
 1. Compilar el proyecto: correr npm install
 2.  Subir archivos por ssh: se conecta a la máquina en azure y sube el build de la aplicación
 3. Subir servidor: la última tarea es subir el servicio del api, se conecta por ssh y corre la tarea forever start app.js que sube el servicio en sails.
