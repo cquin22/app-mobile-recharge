@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-// const BASE_URL = 'http://13.65.92.187:8090/';
-const BASE_URL = 'http://localhost:1337/';
+const BASE_URL = 'http://13.65.92.187:8090/';
+// const BASE_URL = 'http://localhost:1337/';
 
 @Injectable()
 export class ApiService {
