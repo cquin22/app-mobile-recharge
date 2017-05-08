@@ -1,0 +1,36 @@
+<div>
+  <div class="row">
+    <div class="col s12">
+      <h1 class="primary-title">Consultar mi saldo</h1>
+    </div>
+  </div>
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix icon-phone"></i>
+          <input [(ngModel)]="phone" name="phone" id="icon_telephone" type="tel" class="validate">
+          <label for="icon_telephone">Télefono</label>
+        </div>
+        <div class="col s12">
+          <button (click)="getBalance()" class="btn waves-effect waves-light" type="submit" name="action">Consultar saldo
+            <i class="material-icons right icon-arrow-circle-right" ></i>
+          </button>
+          <mz-spinner *ngIf="isSend"
+            [color]="'blue'"
+            [size]="'small'">
+          </mz-spinner>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="component-response" *ngIf="dataResponse">
+  <h3 class="success">Consulta exitosa <i class="icon-check"></i></h3>
+  <p>A continuación la información de su saldo</p>
+  <ul>
+    <li><strong>Saldo: </strong> {{dataResponse.client.money_balance | currency:'COP'}}</li>
+    <li><strong>Segundos disponibles: </strong> {{dataResponse.client.time_left }}</li>
+  </ul>
+</div>

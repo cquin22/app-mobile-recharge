@@ -1,0 +1,50 @@
+<div>
+  <div class="row">
+    <div class="col s12">
+      <h1 class="primary-title">Realizar una recarga</h1>
+    </div>
+  </div>
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix icon-phone"></i>
+          <input [(ngModel)]="phone" name="phone" id="icon_telephone" type="tel" class="validate">
+          <label for="icon_telephone">Télefono</label>
+        </div>
+        <div class="input-field col s7">
+          <i class="material-icons prefix icon-money"></i>
+          <input [(ngModel)]="value" name="value" id="icon_money" type="tel" class="validate">
+          <label for="icon_telephone">Valor</label>
+        </div>
+        <div class="col s5">
+          <mz-select-container>
+            <select [(ngModel)]="currency" name="currency" mz-select id="options-select" >
+              <option  class="left circle">COP</option>
+              <option  class="left circle">USD</option>
+            </select>
+          </mz-select-container>
+        </div>
+        <div class="col s12">
+          <button (click)="sendRecharge()" class="btn waves-effect waves-light" type="submit" name="action">Hacer recarga
+            <i class="material-icons right icon-arrow-circle-right" ></i>
+          </button>
+          <mz-spinner *ngIf="isSend"
+            [color]="'blue'"
+            [size]="'small'">
+          </mz-spinner>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="component-response" *ngIf="dataResponse">
+  <h3>Recarga exitosa</h3>
+  <p>A continuación la información de la recarga</p>
+  <ul>
+    <li><strong>Numero de cliente: </strong> {{dataResponse.client.phone}}</li>
+    <li><strong>Valor de la recarga: </strong> {{dataResponse.recharge.recharge_value | currency:dataResponse.recharge.currency}}</li>
+    <li><strong>Fecha de la recarga:</strong> {{dataResponse.recharge.createdAt | date:'medium'}}</li>
+  </ul>
+</div>

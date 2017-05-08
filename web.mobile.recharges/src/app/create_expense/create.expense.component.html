@@ -1,0 +1,44 @@
+<div>
+  <div class="row">
+    <div class="col s12">
+      <h1 class="primary-title">Realizar una consumo de segundos</h1>
+    </div>
+  </div>
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix icon-phone"></i>
+          <input [(ngModel)]="phone" name="phone" id="icon_telephone" type="tel" class="validate">
+          <label for="icon_telephone">Télefono</label>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix icon-money"></i>
+          <input [(ngModel)]="time" name="value" id="icon_money" type="tel" class="validate">
+          <label for="icon_telephone">Tiempo</label>
+        </div>
+        <div class="col s12">
+          <button (click)="sendExpense()" class="btn waves-effect waves-light" type="submit" name="action">Consumir
+            <i class="material-icons right icon-arrow-circle-right" ></i>
+          </button>
+          <mz-spinner *ngIf="isSend"
+            [color]="'blue'"
+            [size]="'small'">
+          </mz-spinner>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="component-response" *ngIf="dataResponse">
+  <h3>Consumo exitoso</h3>
+  <p>A continuación la información del gasto</p>
+  <ul>
+    <li><strong>Numero de uso: </strong> {{dataResponse.client.phone}}</li>
+    <li><strong>Saldo restante: </strong> {{dataResponse.client.money_balance | currency:'COP'}}</li>
+    <li *ngIf="dataResponse.client.time_left"><strong>Tiempo restante: </strong> {{dataResponse.client.time_left}} Segundos</li>
+    <li><strong>Tiempo gastado:</strong> {{dataResponse.expense.time}} Segundos</li>
+    <li><strong>Fecha del consumo:</strong> {{dataResponse.expense.createdAt | date:'medium'}}</li>
+  </ul>
+</div>

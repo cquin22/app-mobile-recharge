@@ -49,6 +49,32 @@ var MainController =  {
   /**
    * @sailsdoc method
    *
+   * @description Create new client and recharge
+   * @returns {Object} AppResponse.
+   */
+  'getBalance': function(req, res){
+    clientConfig.client = req.body.client;
+    MainController.findOrCreateClient(clientConfig.client)
+      .then(function(){ return MainController.calculateBalanceOrTime('BALANCE')})
+      .then(function(){
+        clientConfig.client.save(function(error){
+          if(error){
+            return res.AppResponse(400, sails.config.constants.response.CUSTOMER_UPDATE_ERROR, error);
+          }else{
+            delete clientConfig.expense;
+            return res.AppResponse(200, sails.config.constants.response.RECHARGE_CREATED_SUCCESS, clientConfig);
+          }
+        });
+
+      })
+      .catch(function(error){
+        return res.AppResponse(400, sails.config.constants.response.UNEXPECTED_ERROR, error);
+      })
+  },
+
+  /**
+   * @sailsdoc method
+   *
    * @description:: Find or create client
    * @param:: {Object} dataClient --> // clientConfig.client
    * @returns:: {Promise}.
@@ -99,6 +125,9 @@ var MainController =  {
           reject(error)
         }else{
           switch (type) {
+            case 'BALANCE':
+              clientConfig.client.time_left = clientConfig.client.money_balance * 1 / cost[0].value;
+              break;
             case 'RECHARGE':
               clientConfig.client.money_balance = clientConfig.client.money_balance + clientConfig.recharge.recharge_value;
               clientConfig.client.time_left = clientConfig.client.money_balance * 1 / cost[0].value;

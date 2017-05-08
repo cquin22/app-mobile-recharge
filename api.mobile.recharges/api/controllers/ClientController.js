@@ -13,7 +13,7 @@ var ClientController = {
    * @description Get client balance
    * @returns {Object} AppResponse.
   */
-  'getBalance': function(req, res){
+  "getRecharges": function(req, res){
       var query = Client.findOne({phone: req.query.phone });
       query.then(function(){
         query.populate('recharges')

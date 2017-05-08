@@ -36,7 +36,8 @@ module.exports.routes = {
   'POST /cost': 'CostController.create',
   'GET /cost': 'CostController.get',
   'PUT /cost': 'CostController.update',
-  'GET /balance': 'ClientController.getBalance',
+  'GET /recharge': 'ClientController.getRecharges',
+  'POST /balance': 'MainController.getBalance',
   'GET /expense': 'ClientController.getExpense',
   'POST /expense': 'MainController.setExpense',
 
