@@ -16,7 +16,7 @@ En este caso se debe implementar en el api que el consumo de sus endpoints, sea 
 En este caso se debe implementar un esquema de autenticación JWT en el api y solo clientes autorizados podrían hacer uso de ella.
 
 
-##Despliegues.
+## Despliegues.
 Para los despliegues se usa una cuenta de Visual Studio Team Services, que me permite automatizar despliegues y tareas, en este caso se especifican 3 tareas:
 
 1. Compilar el proyecto: correr npm install
